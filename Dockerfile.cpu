@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy requirements with CPU-optimized versions
-COPY requirements.cpu.txt requirements.txt
+# Copy requirements
+COPY requirements.txt requirements.txt
 
 # Install Python dependencies with CPU optimizations
 RUN pip install --no-cache-dir --upgrade pip && \
