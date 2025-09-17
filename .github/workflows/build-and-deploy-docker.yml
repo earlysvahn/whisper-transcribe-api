@@ -25,6 +25,9 @@ jobs:
         context: .
         file: ./Dockerfile.cpu
         push: true
+        build-args: |
+          BUILD_VERSION=${{ github.run_number }}
+          BUILD_DATE=${{ github.event.head_commit.timestamp }}
         tags: |
           earlysvahn/whisper-transcribe-api:latest
           earlysvahn/whisper-transcribe-api:cpu

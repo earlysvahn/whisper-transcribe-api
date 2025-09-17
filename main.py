@@ -75,7 +75,9 @@ async def health():
     global model
     return {
         "status": "healthy" if model is not None else "initializing",
-        "model_loaded": model is not None
+        "model_loaded": model is not None,
+        "version": os.getenv("BUILD_VERSION", "dev"),
+        "build_date": os.getenv("BUILD_DATE", "unknown")
     }
 
 @app.post("/transcribe")

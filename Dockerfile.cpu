@@ -24,11 +24,19 @@ COPY main.py .
 # Create directory for temporary audio files and model cache
 RUN mkdir -p /tmp/audio /app/models
 
+# Build arguments for versioning
+ARG BUILD_VERSION=dev
+ARG BUILD_DATE=unknown
+
 # Set environment variables for CPU optimization
 ENV WHISPER_MODEL_SIZE=tiny
 ENV WHISPER_CACHE_DIR=/app/models
 ENV OMP_NUM_THREADS=2
 ENV MKL_NUM_THREADS=2
+
+# Set build info as environment variables
+ENV BUILD_VERSION=$BUILD_VERSION
+ENV BUILD_DATE=$BUILD_DATE
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
