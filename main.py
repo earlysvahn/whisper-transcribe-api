@@ -15,10 +15,14 @@ app = FastAPI(title="Whisper Transcription API", version="1.0.0")
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_origins=[
+        "http://192.168.*.*:*",     # Local network ranges
+        "http://localhost:*",       # Local development
+        "http://127.0.0.1:*",      # Local loopback
+    ],
+    allow_credentials=False,  # Don't allow credentials for security
+    allow_methods=["GET", "POST"],  # Only needed methods
+    allow_headers=["Content-Type"],  # Only needed headers
 )
 
 # Global model variable
