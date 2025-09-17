@@ -1,0 +1,35 @@
+
+  # Python
+  __pycache__/
+  *.pyc
+  *.pyo
+  *.pyd
+  .Python
+  env/
+  venv/
+  .env
+
+  # Audio files (test files can be large)
+  *.wav
+  *.mp3
+  *.m4a
+  *.flac
+
+  # Docker
+  .dockerignore
+
+  # IDE
+  .vscode/
+  .idea/
+  *.swp
+
+  # Model cache (will be downloaded in container)
+  models/
+  *.bin
+
+  # Logs
+  *.log
+
+  # OS
+  .DS_Store
+  Thumbs.db

@@ -1,0 +1,41 @@
+# CPU-optimized Dockerfile for low-resource Proxmox deployment
+FROM python:3.11-slim
+
+# Install system dependencies (minimal)
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements with CPU-optimized versions
+COPY requirements.cpu.txt requirements.txt
+
+# Install Python dependencies with CPU optimizations
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY main.py .
+
+# Create directory for temporary audio files and model cache
+RUN mkdir -p /tmp/audio /app/models
+
+# Set environment variables for CPU optimization
+ENV WHISPER_MODEL_SIZE=tiny
+ENV WHISPER_CACHE_DIR=/app/models
+ENV OMP_NUM_THREADS=2
+ENV MKL_NUM_THREADS=2
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Expose port
+EXPOSE 8000
+
+# Run with single worker for low-resource environments
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
