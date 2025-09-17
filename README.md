@@ -17,15 +17,15 @@ A local FastAPI service for audio transcription using OpenAI's Whisper with the 
 
 1. **Clone or create the project:**
    ```bash
-   git clone <your-repo> whisper-ai
+   git clone <your-repo> whisper-transcribe-api
    # OR create the directory and copy files
-   mkdir whisper-ai && cd whisper-ai
+   mkdir whisper-transcribe-api && cd whisper-transcribe-api
    ```
 
 2. **Build and run with Docker:**
    ```bash
-   docker build -t whisper-ai .
-   docker run -p 8000:8000 whisper-ai
+   docker build -t whisper-transcribe-api .
+   docker run -p 8000:8000 whisper-transcribe-api
    ```
 
 3. **Or use docker-compose:**
@@ -154,10 +154,10 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 ```bash
 # Build
-docker build -t whisper-ai .
+docker build -t whisper-transcribe-api .
 
 # Run with volume mount for development
-docker run -p 8000:8000 -v $(pwd):/app whisper-ai
+docker run -p 8000:8000 -v $(pwd):/app whisper-transcribe-api
 
 # View logs
 docker logs <container_id>
