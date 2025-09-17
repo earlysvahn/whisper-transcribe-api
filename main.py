@@ -13,16 +13,23 @@ import uvicorn
 app = FastAPI(title="Whisper Transcription API", version="1.0.0")
 
 # Add CORS middleware
+cors_origins = [
+    "http://localhost",
+    "http://localhost:5173",
+    "http://127.0.0.1",
+    "http://127.0.0.1:5173",
+]
+
+# Add custom origins from environment variable
+custom_origins = os.getenv("CORS_ORIGINS", "").split(",")
+cors_origins.extend([origin.strip() for origin in custom_origins if origin.strip()])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://192.168.*.*:*",     # Local network ranges
-        "http://localhost:*",       # Local development
-        "http://127.0.0.1:*",      # Local loopback
-    ],
-    allow_credentials=False,  # Don't allow credentials for security
-    allow_methods=["GET", "POST"],  # Only needed methods
-    allow_headers=["Content-Type"],  # Only needed headers
+    allow_origins=cors_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
 )
 
 # Global model variable
