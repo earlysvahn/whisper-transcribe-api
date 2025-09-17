@@ -3,11 +3,12 @@ version: '3.8'
 
 services:
   whisper-ai-cpu:
-    build:
-      context: .
-      dockerfile: Dockerfile.cpu
-    # Alternative: use pre-built image from GitHub registry
-    # image: ghcr.io/your-username/whisper-ai:latest
+    # Build locally first to avoid registry auth issues
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.cpu
+    # Use pre-built image instead
+    image: whisper-ai-local
     container_name: whisper-ai-test
     ports:
       - "8000:8000"
