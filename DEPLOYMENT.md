@@ -9,14 +9,14 @@
    git init
    git add .
    git commit -m "Initial Whisper AI service"
-   git remote add origin https://github.com/your-username/whisper-ai.git
+   git remote add origin https://github.com/earlysvahn/whisper-transcribe-api.git
    git push -u origin main
    ```
 
 2. **In Portainer**:
    - Go to **Stacks** → **Add Stack**
    - Choose **Repository** method
-   - Repository URL: `https://github.com/your-username/whisper-ai`
+   - Repository URL: `https://github.com/earlysvahn/whisper-transcribe-api`
    - Compose path: `docker-compose.proxmox.yml`
    - Enable **GitOps updates** for auto-redeploy on push
    - Deploy
@@ -41,11 +41,11 @@
            with:
              file: Dockerfile.cpu
              push: true
-             tags: ghcr.io/${{ github.repository }}:latest
+             tags: earlysvahn/whisper-transcribe-api:latest
    ```
 
 2. **In Portainer**:
-   - Use `image: ghcr.io/your-username/whisper-ai:latest`
+   - Use `image: earlysvahn/whisper-transcribe-api:latest`
    - Enable **Auto-update** for automatic image pulls
 
 ### Option 3: Manual Upload
@@ -77,9 +77,9 @@
 
 1. **Create GitHub repo** with these files:
    ```
-   whisper-ai/
+   whisper-transcribe-api/
    ├── main.py
-   ├── requirements.cpu.txt
+   ├── requirements.txt
    ├── Dockerfile.cpu
    ├── docker-compose.proxmox.yml
    └── README.md
@@ -87,7 +87,7 @@
 
 2. **In Portainer**:
    - Stacks → Add Stack → Repository
-   - URL: `https://github.com/your-username/whisper-ai`
+   - URL: `https://github.com/earlysvahn/whisper-transcribe-api`
    - Compose file: `docker-compose.proxmox.yml`
    - Environment variables (optional):
      ```

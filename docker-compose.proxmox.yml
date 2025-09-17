@@ -4,7 +4,7 @@ version: '3.8'
 services:
   whisper-ai-cpu:
     # Use pre-built image from Docker Hub (built via GitHub Actions)
-    image: earlysvah/whisper-ai:latest
+    image: earlysvahn/whisper-transcribe-api:latest
     container_name: whisper-ai-test
     ports:
       - "8000:8000"

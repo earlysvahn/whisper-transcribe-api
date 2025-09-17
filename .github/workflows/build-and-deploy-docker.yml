@@ -26,8 +26,8 @@ jobs:
         file: ./Dockerfile.cpu
         push: true
         tags: |
-          earlysvahn/whisper-ai:latest
-          earlysvahn/whisper-ai:cpu
+          earlysvahn/whisper-transcribe-api:latest
+          earlysvahn/whisper-transcribe-api:cpu
 
     - name: Build and push GPU-enabled image
       uses: docker/build-push-action@v5
@@ -36,4 +36,4 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          earlysvahn/whisper-ai:gpu
+          earlysvahn/whisper-transcribe-api:gpu
